@@ -61,6 +61,8 @@ main {
   display: flex;
   flex-direction: column;
   width: 48%;
+  font-family: "Kanit", sans-serif;
+  color: rgb(255, 219, 119);
 }
 .pokedex-container-2__screen {
   margin-top: 245px;
@@ -72,14 +74,12 @@ main {
   margin-top: 15px;
 }
 .pokedex-container-2__name--title {
-  color: rgb(255, 219, 119);
   margin-right: 10px;
 }
 .pokedex-container-2__type {
   margin-top: 15px;
 }
 .pokedex-container-2__type--title {
-  color: rgb(255, 219, 119);
   margin-right: 17px;
 }
 .pokedex-container-2--bot {
@@ -97,12 +97,10 @@ main {
   margin-bottom: 34px;
 }
 .pokedex-container-2__id--title {
-  color: rgb(255, 219, 119);
-  margin-right: 17px;
+  margin-right: 8px;
 }
 .pokedex-container-2__nGames--title {
-  color: rgb(255, 219, 119);
-  margin-right: 17px;
+  margin-right: 6px;
 }
 .pokedex-container-2__move {
   margin-right: 5px;
@@ -115,6 +113,11 @@ main {
 .pokedex-container-2__move--top {
   height: 37px;
   width: 39px;
+  border-radius: 5px;
+}
+.pokedex-container-2__move--top:hover {
+  background-color: rgba(255, 228, 196, 0.5);
+  transform: scale(1.2);
 }
 .pokedex-container-2__move--mid {
   width: 100%;
@@ -126,14 +129,29 @@ main {
 .pokedex-container-2__move--left {
   height: 100%;
   width: 39px;
+  border-radius: 5px;
+}
+.pokedex-container-2__move--left:hover {
+  background-color: rgba(255, 228, 196, 0.5);
+  transform: scale(1.2);
 }
 .pokedex-container-2__move--right {
   height: 100%;
   width: 39px;
+  border-radius: 5px;
+}
+.pokedex-container-2__move--right:hover {
+  background-color: rgba(255, 228, 196, 0.5);
+  transform: scale(1.2);
 }
 .pokedex-container-2__move--bot {
   height: 37px;
   width: 39px;
+  border-radius: 5px;
+}
+.pokedex-container-2__move--bot:hover {
+  background-color: rgba(255, 228, 196, 0.5);
+  transform: scale(1.2);
 }
 
 .hola {

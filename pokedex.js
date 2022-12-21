@@ -305,6 +305,43 @@ const moveRules = async (event) => {
     }
 }
 
+const moveRulesPlusTop = async() => {
+    [currentPos, screenPokemons] = await moveUp(currentPos,screenPokemons);
+    console.log('AFTER:\n' + obtainPokeMatrix(screenPokemons));
+    console.log('CurrentPos:' + currentPos);
+    console.log('First index:' + screenPokemons[0].id);
+    console.log('---')
+    getPokemonInfo(screenPokemons,currentPos);
+}
+
+const moveRulesPlusBot = async() => {
+    [currentPos, screenPokemons] = await moveDown(currentPos,screenPokemons);
+    console.log('AFTER:\n' + obtainPokeMatrix(screenPokemons));
+    console.log('CurrentPos:' + currentPos);
+    console.log('First index:' + screenPokemons[0].id);
+    console.log('---')
+    getPokemonInfo(screenPokemons,currentPos);
+}
+
+const moveRulesPlusLeft = async() => {
+    [currentPos, screenPokemons] = await moveLeft(currentPos,screenPokemons);
+    console.log('AFTER:\n' + obtainPokeMatrix(screenPokemons));
+    console.log('CurrentPos:' + currentPos);
+    console.log('First index:' + screenPokemons[0].id);
+    console.log('---')
+    getPokemonInfo(screenPokemons,currentPos);
+}
+
+const moveRulesPlusRight = async() => {
+    [currentPos, screenPokemons] = await moveRight(currentPos,screenPokemons);
+    console.log('AFTER:\n' + obtainPokeMatrix(screenPokemons));
+    console.log('CurrentPos:' + currentPos);
+    console.log('First index:' + screenPokemons[0].id);
+    console.log('---')
+    getPokemonInfo(screenPokemons,currentPos);
+}
+
+
 // Get Pokemon Info
 const getPokemonInfo = (screenPokemons,currentPos) => {
     const pokemon = screenPokemons[currentPos - 1]
@@ -331,7 +368,6 @@ const obtainPokeMatrix = (screenPokemons)=> {
     const result = `[${list[0]}  ${list[1]}  ${list[2]}]\n[${list[3]}  ${list[4]}  ${list[5]}]\n[${list[6]}  ${list[7]}  ${list[8]}]`
     return result;
 }
-
 
 window.onload = async () => {
     

@@ -73,7 +73,9 @@ main {
         flex-direction: column;
         width:48%;
         // Cuidado con añadir altura aqui: saldra blanco por debajo de azul
-        
+        font-family: 'Kanit', sans-serif;
+        color:rgb(255, 219, 119);
+
         // SCREEN BIG
         &__screen{
             margin-top: 245px;
@@ -85,7 +87,6 @@ main {
         &__name{
             margin-top:15px;
             &--title{
-                color:rgb(255, 219, 119);
                 margin-right:10px;
             }
         }
@@ -93,7 +94,6 @@ main {
         &__type{
             margin-top:15px;
             &--title{
-                color:rgb(255, 219, 119);
                 margin-right:17px;
             }
         }
@@ -116,15 +116,13 @@ main {
         &__id{
             margin-bottom:34px;
             &--title{
-                color:rgb(255, 219, 119);
-                margin-right:17px;
+                margin-right:8px;
             }
         }
 
         &__nGames{
             &--title{
-                color:rgb(255, 219, 119);
-                margin-right:17px;
+                margin-right:6px;
             }
         }
         // BOT ITEMS - MOVE
@@ -139,6 +137,11 @@ main {
             &--top{
                 height: 37px;
                 width: 39px;
+                border-radius: 5px;
+                &:hover {
+                    background-color: rgb(255, 228, 196,0.5);
+                    transform:scale(1.2);
+                }
             }
 
             &--mid{
@@ -152,16 +155,31 @@ main {
             &--left{
                 height:100%;
                 width: 39px;
+                border-radius: 5px;
+                &:hover {
+                    background-color: rgb(255, 228, 196,0.5);
+                    transform:scale(1.2);
+                }
             }
 
             &--right{
                 height:100%;
                 width: 39px;
+                border-radius: 5px;
+                &:hover {
+                    background-color: rgb(255, 228, 196,0.5);
+                    transform:scale(1.2);
+                }
             }
 
             &--bot{
                 height: 37px;
                 width: 39px;
+                border-radius: 5px;
+                &:hover {
+                    background-color: rgb(255, 228, 196,0.5);
+                    transform:scale(1.2);
+                }
             }
         }
 
