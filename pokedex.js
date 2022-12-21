@@ -1,3 +1,11 @@
+
+// -----------------GLOBAL VARIABLES-----------------
+let screenPokemons = []; //Pokemons to show on screen
+let currentPos = 1; //Position of selector in screen
+let  firstPokemonId = 1; // Id of the first Pokemon in the screen
+
+// -----------------FUNCTIONS-----------------
+//GET POKEMON INFO
 const getPokemonById = async (i) =>{
     const response = await fetch('https://pokeapi.co/api/v2/pokemon/'+i);
     const res = await response.json();
@@ -13,10 +21,6 @@ const getPokemonById = async (i) =>{
     return pokemon;
 }
 
-let screenPokemons = [];
-let currentPos = 1;
-let  firstPokemonId = 1;
-
 const showPokemons = async () =>{
     // ol-father
     const ol = document.querySelector('ol');
@@ -29,10 +33,11 @@ const showPokemons = async () =>{
         li.style.height = '96px';
         li.id = 'li-'+i;
         li.className = 'li-pokemon';
+        //Get Information for 1st Pokemon
         if (i==1){
             //Get index
             li.style.border= '2px groove red';
-            //Get Info
+            //Get Container
             const container2 =  document.querySelector('.pokedex-container-2');
             //Set name
             const name = document.createElement('span');
@@ -46,6 +51,18 @@ const showPokemons = async () =>{
             type.style.color = 'white';
             type.id = 'pokemon-type';
             container2.appendChild(type);
+            //Set ID
+            const idPokemon = document.createElement('span');
+            idPokemon.innerHTML = pokemon.id;
+            idPokemon.style.color = 'white';
+            idPokemon.id = 'pokemon-id';
+            container2.appendChild(idPokemon);
+            //Set nGames
+            const nGames = document.createElement('span');
+            nGames.innerHTML = pokemon.nGames;
+            nGames.style.color = 'white';
+            nGames.id = 'pokemon-nGames';
+            container2.appendChild(nGames);
         }
         //append to ol.father
         ol.appendChild(li);
@@ -83,7 +100,8 @@ const showPokemons = async () =>{
 //     }
 // }
 
-// MOVE IN MENU
+// -----------------MOVE IN MENU-----------------
+// CHANGE CURRENT POS
 const drawIndex = (prevIndex, newIndex) => {
     //Delete prev index
     const prevItem = document.querySelector('#li-'+prevIndex);
@@ -95,6 +113,7 @@ const drawIndex = (prevIndex, newIndex) => {
 
 }
 
+// MOVE FUNCTIONS
 const moveDown = async(currentPos, screenPokemons) => {
     const firstPokemonId = await screenPokemons[0].id;
     switch (currentPos) {
@@ -245,7 +264,6 @@ const moveLeft = async (currentPos,screenPokemons) => {
     }
 }
 
-//------------------------------------------------
 // UPDATE POKEMONS
 const updatePokemons= async(firstPokemonId)=>{
     for (i=1;i<=9;i++){       
@@ -260,23 +278,10 @@ const updatePokemons= async(firstPokemonId)=>{
     return screenPokemons;
 }
 
-//------------------------------------------------
-
-
-// Obtain showed Pokemons to names Matrix
-const obtainPokeMatrix = (screenPokemons)=> {
-    let list = [];
-    screenPokemons.forEach((item)=>{
-        list.push(item.name);
-    });
-    const result = `[${list[0]}  ${list[1]}  ${list[2]}]\n[${list[3]}  ${list[4]}  ${list[5]}]\n[${list[6]}  ${list[7]}  ${list[8]}]`
-    return result;
-}
-
 const moveRules = async (event) => {
     console.log('BEFORE:\n' + obtainPokeMatrix(screenPokemons));
-    console.log('CurrentPos:' + currentPos);
-    console.log('First index:' + screenPokemons[0].id);
+    // console.log('CurrentPos:' + currentPos);
+    // console.log('First index:' + screenPokemons[0].id);
 
     switch(event.keyCode){
         case 37: // Izquierda
@@ -294,6 +299,34 @@ const moveRules = async (event) => {
     }
 }
 
+// Get Pokemon Info
+const getPokemonInfo = (screenPokemons,currentPos) => {
+    const pokemon = screenPokemons[currentPos - 1]
+    // Name
+    const namePokemon = document.querySelector('#pokemon-name');
+    namePokemon.innerHTML = pokemon.name;
+    // Type
+    const typePokemon = document.querySelector('#pokemon-type');
+    typePokemon.innerHTML = pokemon.type;
+    // ID
+    const idPokemon = document.querySelector('#pokemon-id');
+    idPokemon.innerHTML = pokemon.id;
+    // nGames
+    const nGames = document.querySelector('#pokemon-nGames');
+    nGames.innerHTML = pokemon.nGames;
+}
+
+// Obtain showed Pokemons to names Matrix
+const obtainPokeMatrix = (screenPokemons)=> {
+    let list = [];
+    screenPokemons.forEach((item)=>{
+        list.push(item.name);
+    });
+    const result = `[${list[0]}  ${list[1]}  ${list[2]}]\n[${list[3]}  ${list[4]}  ${list[5]}]\n[${list[6]}  ${list[7]}  ${list[8]}]`
+    return result;
+}
+
+
 window.onload = async () => {
     
     await showPokemons();
@@ -306,6 +339,8 @@ window.onload = async () => {
             console.log('AFTER:\n' + obtainPokeMatrix(screenPokemons));
             console.log('CurrentPos:' + currentPos);
             console.log('First index:' + screenPokemons[0].id);
+            console.log('---')
+            getPokemonInfo(screenPokemons,currentPos);
             lockKey= false;
         }
     }
