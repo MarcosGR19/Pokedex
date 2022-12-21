@@ -1,0 +1,67 @@
+.unstyle {
+  all: unset;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+/* ---------BLUE BACKGROUND--------- */
+main {
+  background-color: rgb(43, 125, 233);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+/* ---------POKEDEX--------- */
+.pokedex-ol {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.pokedex-background {
+  margin-right: 150px;
+  width: 900px;
+  height: 100%;
+  background-image: url("./sources/pokedex.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+@media screen and (max-width: 550px) {
+  .pokedex-background {
+    background-image: none;
+    width: 100%;
+  }
+}
+.pokedex-container {
+  display: inline-block;
+  width: 48%;
+}
+@media screen and (max-width: 1000px) {
+  .pokedex-container {
+    padding-left: 10%;
+  }
+}
+.pokedex-container-screen {
+  margin-top: 260px;
+  margin-left: 78px;
+  width: 292px;
+  height: 300px;
+}
+.pokedex-container-2 {
+  display: inline-block;
+  width: 48%;
+}
+
+.hola {
+  background-color: red;
+  width: 25px;
+  height: 30px;
+}/*# sourceMappingURL=styles.css.map */
