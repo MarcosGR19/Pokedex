@@ -13,7 +13,7 @@ const getPokemonById = async (i) =>{
     const pokemon = {
         name: res.name,
         image: res.sprites['front_default'],
-        type: res.types.map((type) => type.type.name).join(', '),
+        type: res.types.map((type) => type.type.name).join(' - '),
         id: res.id,
         nGames: res.game_indices.length
     };
@@ -40,29 +40,35 @@ const showPokemons = async () =>{
             //Get Container
             const container2 =  document.querySelector('.pokedex-container-2');
             //Set name
+            const nameContainer = document.querySelector('.pokedex-container-2__name')
             const name = document.createElement('span');
             name.id = 'pokemon-name';
-            name.innerHTML = pokemon.name;
+            name.className = 'pokedex-container-2__name--value';
+            name.innerHTML = pokemon.name.toUpperCase();
             name.style.color = 'white';
-            container2.appendChild(name);
+            nameContainer.appendChild(name);
             //Set Type
+            const typeContainer = document.querySelector('.pokedex-container-2__type')
             const type = document.createElement('span');
-            type.innerHTML = pokemon.type;
-            type.style.color = 'white';
             type.id = 'pokemon-type';
-            container2.appendChild(type);
+            type.className = 'pokedex-container-2__type--value';
+            type.innerHTML = pokemon.type.toUpperCase();
+            type.style.color = 'white';
+            typeContainer.appendChild(type);
             //Set ID
+            const idPokemonContainer = document.querySelector('.pokedex-container-2__id')
             const idPokemon = document.createElement('span');
             idPokemon.innerHTML = pokemon.id;
             idPokemon.style.color = 'white';
             idPokemon.id = 'pokemon-id';
-            container2.appendChild(idPokemon);
+            idPokemonContainer.appendChild(idPokemon);
             //Set nGames
+            const nGamesContainer = document.querySelector('.pokedex-container-2__nGames')
             const nGames = document.createElement('span');
             nGames.innerHTML = pokemon.nGames;
             nGames.style.color = 'white';
             nGames.id = 'pokemon-nGames';
-            container2.appendChild(nGames);
+            nGamesContainer.appendChild(nGames);
         }
         //append to ol.father
         ol.appendChild(li);
@@ -304,10 +310,10 @@ const getPokemonInfo = (screenPokemons,currentPos) => {
     const pokemon = screenPokemons[currentPos - 1]
     // Name
     const namePokemon = document.querySelector('#pokemon-name');
-    namePokemon.innerHTML = pokemon.name;
+    namePokemon.innerHTML = pokemon.name.toUpperCase();
     // Type
     const typePokemon = document.querySelector('#pokemon-type');
-    typePokemon.innerHTML = pokemon.type;
+    typePokemon.innerHTML = pokemon.type.toUpperCase();
     // ID
     const idPokemon = document.querySelector('#pokemon-id');
     idPokemon.innerHTML = pokemon.id;

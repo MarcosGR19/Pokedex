@@ -32,11 +32,13 @@ main {
         // max-width: 900px;
         height: 100%;
 
+        display:flex;
+        align-items:flex-start;
+
         background-image: url("./sources/pokedex.png");
         background-repeat: no-repeat;
         background-size:contain;
         background-position: center;
-        
 
         @include mobile{
             background-image: none;
@@ -67,9 +69,102 @@ main {
 
     // SEGUNDO BLOQUE
     &-container-2{
-        display:inline-block;
+        display:flex;
+        flex-direction: column;
         width:48%;
         // Cuidado con añadir altura aqui: saldra blanco por debajo de azul
+        
+        // SCREEN BIG
+        &__screen{
+            margin-top: 245px;
+            margin-left:120px;
+            width:260px;
+            height:100px;
+        }
+
+        &__name{
+            margin-top:15px;
+            &--title{
+                color:rgb(255, 219, 119);
+                margin-right:10px;
+            }
+        }
+
+        &__type{
+            margin-top:15px;
+            &--title{
+                color:rgb(255, 219, 119);
+                margin-right:17px;
+            }
+        }
+
+        // BOT ITEMS
+        &--bot{
+            height:297px;
+            display:flex;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+
+        // BOT ITEMS - TEXT
+        &__screen-2{
+            margin-left:118px;
+            margin-bottom: 25px;
+            width: 154px;
+        }
+
+        &__id{
+            margin-bottom:34px;
+            &--title{
+                color:rgb(255, 219, 119);
+                margin-right:17px;
+            }
+        }
+
+        &__nGames{
+            &--title{
+                color:rgb(255, 219, 119);
+                margin-right:17px;
+            }
+        }
+        // BOT ITEMS - MOVE
+        &__move{
+            margin-right: 5px;
+            height:109px;
+            width: 112px;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+
+            &--top{
+                height: 37px;
+                width: 39px;
+            }
+
+            &--mid{
+                width: 100%;
+                height: 34px;
+                display:flex;
+                flex-wrap: wrap;
+                justify-content:space-between;
+            }
+
+            &--left{
+                height:100%;
+                width: 39px;
+            }
+
+            &--right{
+                height:100%;
+                width: 39px;
+            }
+
+            &--bot{
+                height: 37px;
+                width: 39px;
+            }
+        }
+
     }
 }
   
