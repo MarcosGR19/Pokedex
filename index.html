@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./styles.css" />
     <link rel="shortcut icon" href="./sources/pokedex.ico"/>
     <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet" />
-    <script src="./pokedex.js" defer></script>
+    <script src="./pokedexNoGlobalVars.js" defer></script>
 </head>
 
 <body>
@@ -93,12 +93,16 @@
                     <!-- </div> -->
                     <!-- <div  class ="pokedex-container-2__move-container"> -->
                         <div class = "pokedex-container-2__move">
-                            <div class="pokedex-container-2__move--top" onclick="moveRulesPlusTop()"></div>
+                            <!-- onclick="moveRulesPlusTop()" -->
+                            <div class="pokedex-container-2__move--top" ></div>
                             <div class="pokedex-container-2__move--mid">
-                                <div class="pokedex-container-2__move--left" onclick="moveRulesPlusLeft()"></div>
-                                <div class="pokedex-container-2__move--right" onclick="moveRulesPlusRight()"></div>
+                                <!-- onclick="moveRulesPlusLeft()" -->
+                                <div class="pokedex-container-2__move--left" ></div>
+                                <!-- onclick="moveRulesPlusRight()" -->
+                                <div class="pokedex-container-2__move--right" ></div>
                             </div>
-                            <div class="pokedex-container-2__move--bot" onclick="moveRulesPlusBot()"></div>
+                            <!-- onclick="moveRulesPlusBot()" -->
+                            <div class="pokedex-container-2__move--bot" ></div>
                         </div>
                     <!-- </div> -->
                 </div>
