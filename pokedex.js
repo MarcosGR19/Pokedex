@@ -2,23 +2,66 @@
 // -----------------GLOBAL VARIABLES-----------------
 let screenPokemons = []; //Pokemons to show on screen
 let currentPos = 1; //Position of selector in screen
-let  firstPokemonId = 1; // Id of the first Pokemon in the screen
+let firstPokemonId = 1; // Id of the first Pokemon in the screen
 
 // -----------------FUNCTIONS-----------------
 //GET POKEMON INFO
 const getPokemonById = async (i) =>{
     const response = await fetch('https://pokeapi.co/api/v2/pokemon/'+i);
     const res = await response.json();
-
     const pokemon = {
         name: res.name,
         image: res.sprites['front_default'],
         type: res.types.map((type) => type.type.name).join(' - '),
         id: res.id,
-        nGames: res.game_indices.length
+        height: res.height,
+        ps: res.stats[0].base_stat,
+        atk: res.stats[1].base_stat,
+        def: res.stats[2].base_stat,
+        spAtk: res.stats[3].base_stat,
+        spDef: res.stats[4].base_stat,
+        speed: res.stats[5].base_stat
     };
-
     return pokemon;
+}
+
+const getNumBars = (pokemonStat) => {
+    if (pokemonStat<=20){
+        return 1;
+    } else if (pokemonStat >20 && pokemonStat<=40){
+        return 2;
+    } else if (pokemonStat >40 && pokemonStat<=60){
+        return 3;
+    } else if (pokemonStat >60 && pokemonStat<=80){
+        return 4;
+    } else if (pokemonStat >80 && pokemonStat<=100){
+        return 5;
+    } else if (pokemonStat >100){
+        return 6;
+    } 
+}
+
+const drawLines = (container,n) =>{
+    for (i = 1; i <= n; i++){
+        const child = document.createElement('div');
+        child.className = 'white-box';
+        container.appendChild(child)
+    }
+}
+
+const getPokemonStats = (pokemon) => {
+    const containerPS = document.querySelector('.PS');
+    drawLines(containerPS,getNumBars(pokemon.ps));
+    const containerATK = document.querySelector('.ATK');
+    drawLines(containerATK,getNumBars(pokemon.atk));
+    const containerDEF = document.querySelector('.DEF');
+    drawLines(containerDEF,getNumBars(pokemon.def));
+    const containerSPATK = document.querySelector('.SP-ATK');
+    drawLines(containerSPATK,getNumBars(pokemon.spAtk));
+    const containerSPDEF = document.querySelector('.SP-DEF');
+    drawLines(containerSPDEF,getNumBars(pokemon.spDef));
+    const containerSPEED = document.querySelector('.SPEED');
+    drawLines(containerSPEED,getNumBars(pokemon.speed));
 }
 
 const showPokemons = async () =>{
@@ -33,6 +76,7 @@ const showPokemons = async () =>{
         li.style.height = '96px';
         li.id = 'li-'+i;
         li.className = 'li-pokemon';
+        
         //Get Information for 1st Pokemon
         if (i==1){
             //Get index
@@ -62,13 +106,15 @@ const showPokemons = async () =>{
             idPokemon.style.color = 'white';
             idPokemon.id = 'pokemon-id';
             idPokemonContainer.appendChild(idPokemon);
-            //Set nGames
-            const nGamesContainer = document.querySelector('.pokedex-container-2__nGames')
-            const nGames = document.createElement('span');
-            nGames.innerHTML = pokemon.nGames;
-            nGames.style.color = 'white';
-            nGames.id = 'pokemon-nGames';
-            nGamesContainer.appendChild(nGames);
+            //Set height
+            const heightContainer = document.querySelector('.pokedex-container-2__height')
+            const height = document.createElement('span');
+            height.innerHTML = pokemon.height + ' dm';
+            height.style.color = 'white';
+            height.id = 'pokemon-height';
+            heightContainer.appendChild(height);
+            //Set Stats
+            // getPokemonStats(pokemon);
         }
         //append to ol.father
         ol.appendChild(li);
@@ -78,11 +124,7 @@ const showPokemons = async () =>{
         img.id = 'pokemon-img-'+i;
         img.src=`${pokemon.image}`;
         li.appendChild(img);
-        // Type
-        // const type = document.createElement('type');
-        // type.innerHTML = pokemon.type;
-        // li.appendChild(type);
-
+        
         //Put pokemons in list
         screenPokemons.push(pokemon);
     }
@@ -107,6 +149,30 @@ const showPokemons = async () =>{
 // }
 
 // -----------------MOVE IN MENU-----------------
+//Add click functionality
+const addClick =  () => {
+    for (i=1; i<=9;i++){
+        const item = document.querySelector('#li-'+i);
+        // item.addEventListener("click",select(currentPos, i))
+        item.onclick = async(click) => {
+            //Delete prev index
+            const prevItem = document.querySelector('#li-'+currentPos);
+            prevItem.style.border = 'None';
+
+            //Obtain index selected from click
+            clickIndex = click.target.id[click.target.id.length-1];
+             // create new index select
+            const newItem = document.querySelector('#li-'+clickIndex);
+            newItem.style.border= '2px groove red';
+
+            currentPos = clickIndex;
+            getPokemonInfo(screenPokemons, currentPos);
+            console.log(obtainPokeMatrix(screenPokemons))
+            console.log(currentPos)  
+        };
+    }
+}
+
 // CHANGE CURRENT POS
 const drawIndex = (prevIndex, newIndex) => {
     //Delete prev index
@@ -116,11 +182,10 @@ const drawIndex = (prevIndex, newIndex) => {
     //create new index
     const newItem = document.querySelector('#li-'+newIndex);
     newItem.style.border= '2px groove red';
-
 }
 
 // MOVE FUNCTIONS
-const moveDown = async(currentPos, screenPokemons) => {
+const moveDown = async() => {
     const firstPokemonId = await screenPokemons[0].id;
     switch (currentPos) {
         case 1:
@@ -159,7 +224,7 @@ const moveDown = async(currentPos, screenPokemons) => {
     }
 }
 
-const moveUp = async (currentPos,screenPokemons) => {
+const moveUp = async () => {
     const firstPokemonId = screenPokemons[0].id;
     switch (currentPos) {
         case 1:
@@ -198,7 +263,7 @@ const moveUp = async (currentPos,screenPokemons) => {
     }
 }
 
-const moveRight = async(currentPos,screenPokemons) => {
+const moveRight = async() => {
     const firstPokemonId = screenPokemons[0].id;
     switch (currentPos) {
         case 1:
@@ -234,7 +299,7 @@ const moveRight = async(currentPos,screenPokemons) => {
     }
 }
 
-const moveLeft = async (currentPos,screenPokemons) => {
+const moveLeft = async () => {
     const firstPokemonId = screenPokemons[0].id;
     switch (currentPos) {
         case 1:
@@ -284,6 +349,7 @@ const updatePokemons= async(firstPokemonId)=>{
     return screenPokemons;
 }
 
+//Move rules
 const moveRules = async (event) => {
     console.log('BEFORE:\n' + obtainPokeMatrix(screenPokemons));
     // console.log('CurrentPos:' + currentPos);
@@ -291,22 +357,23 @@ const moveRules = async (event) => {
 
     switch(event.keyCode){
         case 37: // Izquierda
-            [currentPos, screenPokemons] = await moveLeft(currentPos,screenPokemons);
+            [currentPos, screenPokemons] = await moveLeft();
             break;
         case 38: // Arriba
-            [currentPos, screenPokemons] = await moveUp(currentPos,screenPokemons);
+            [currentPos, screenPokemons] = await moveUp();
             break;
         case 39: // Derecha
-            [currentPos, screenPokemons] = await moveRight(currentPos,screenPokemons);
+            [currentPos, screenPokemons] = await moveRight();
             break;
         case 40: // Bajar
-            [currentPos, screenPokemons] = await moveDown(currentPos,screenPokemons);
+            [currentPos, screenPokemons] = await moveDown();
             break;
     }
 }
 
+//Move for + image
 const moveRulesPlusTop = async() => {
-    [currentPos, screenPokemons] = await moveUp(currentPos,screenPokemons);
+    [currentPos, screenPokemons] = await moveUp();
     console.log('AFTER:\n' + obtainPokeMatrix(screenPokemons));
     console.log('CurrentPos:' + currentPos);
     console.log('First index:' + screenPokemons[0].id);
@@ -315,7 +382,7 @@ const moveRulesPlusTop = async() => {
 }
 
 const moveRulesPlusBot = async() => {
-    [currentPos, screenPokemons] = await moveDown(currentPos,screenPokemons);
+    [currentPos, screenPokemons] = await moveDown();
     console.log('AFTER:\n' + obtainPokeMatrix(screenPokemons));
     console.log('CurrentPos:' + currentPos);
     console.log('First index:' + screenPokemons[0].id);
@@ -324,7 +391,7 @@ const moveRulesPlusBot = async() => {
 }
 
 const moveRulesPlusLeft = async() => {
-    [currentPos, screenPokemons] = await moveLeft(currentPos,screenPokemons);
+    [currentPos, screenPokemons] = await moveLeft();
     console.log('AFTER:\n' + obtainPokeMatrix(screenPokemons));
     console.log('CurrentPos:' + currentPos);
     console.log('First index:' + screenPokemons[0].id);
@@ -333,7 +400,7 @@ const moveRulesPlusLeft = async() => {
 }
 
 const moveRulesPlusRight = async() => {
-    [currentPos, screenPokemons] = await moveRight(currentPos,screenPokemons);
+    [currentPos, screenPokemons] = await moveRight();
     console.log('AFTER:\n' + obtainPokeMatrix(screenPokemons));
     console.log('CurrentPos:' + currentPos);
     console.log('First index:' + screenPokemons[0].id);
@@ -343,7 +410,7 @@ const moveRulesPlusRight = async() => {
 
 
 // Get Pokemon Info
-const getPokemonInfo = (screenPokemons,currentPos) => {
+const getPokemonInfo = (screenPokemons, currentPos) => {
     const pokemon = screenPokemons[currentPos - 1]
     // Name
     const namePokemon = document.querySelector('#pokemon-name');
@@ -354,9 +421,29 @@ const getPokemonInfo = (screenPokemons,currentPos) => {
     // ID
     const idPokemon = document.querySelector('#pokemon-id');
     idPokemon.innerHTML = pokemon.id;
-    // nGames
-    const nGames = document.querySelector('#pokemon-nGames');
-    nGames.innerHTML = pokemon.nGames;
+    // height
+    const height = document.querySelector('#pokemon-height');
+    height.innerHTML = pokemon.height + ' dm';
+
+    //bars
+    // const containerPS = document.querySelector('.PS');
+    // containerPS.innerHTML = '';
+    // drawLines(containerPS,getNumBars(pokemon.ps));
+    // const containerATK = document.querySelector('.ATK');
+    // containerATK.innerHTML = '';
+    // drawLines(containerATK,getNumBars(pokemon.atk));
+    // const containerDEF = document.querySelector('.DEF');
+    // containerDEF.innerHTML = '';
+    // drawLines(containerDEF,getNumBars(pokemon.def));
+    // const containerSPATK = document.querySelector('.SP-ATK');
+    // containerSPATK.innerHTML = '';
+    // drawLines(containerSPATK,getNumBars(pokemon.spAtk));
+    // const containerSPDEF = document.querySelector('.SP-DEF');
+    // containerSPDEF.innerHTML = '';
+    // drawLines(containerSPDEF,getNumBars(pokemon.spDef));
+    // const containerSPEED = document.querySelector('.SPEED');
+    // containerSPEED.innerHTML = '';
+    // drawLines(containerSPEED,getNumBars(pokemon.speed));
 }
 
 // Obtain showed Pokemons to names Matrix
@@ -369,9 +456,11 @@ const obtainPokeMatrix = (screenPokemons)=> {
     return result;
 }
 
-window.onload = async () => {
-    
+
+const main = async ()=> {
     await showPokemons();
+
+    // addClick();
 
     let lockKey = false;
     document.body.onkeydown = async function(event){
@@ -380,12 +469,14 @@ window.onload = async () => {
             await moveRules(event);
             console.log('AFTER:\n' + obtainPokeMatrix(screenPokemons));
             console.log('CurrentPos:' + currentPos);
-            console.log('First index:' + screenPokemons[0].id);
+            console.log('First id Pokemon:' + screenPokemons[0].id);
             console.log('---')
             getPokemonInfo(screenPokemons,currentPos);
             lockKey= false;
         }
     }
-    
 }
+
+main();
+
 
