@@ -140,7 +140,8 @@ const addClick = (click, currentPos) => {
     prevItem.style.border = 'None';
 
     //Obtain index selected from click
-    clickIndex = click.target.id[click.target.id.length-1];
+    clickIndex = parseInt(click.target.id[click.target.id.length-1]);
+    
      // create new index select
     const newItem = document.querySelector('#li-'+clickIndex);
     newItem.style.border= '2px groove red';
@@ -428,30 +429,33 @@ const main = async ()=> {
     }
 
     // ----------Add moving in screen keys - WITH EVENT LISTENERS (DOES NOT WORK WITH MOVING KEYS)----------
-    // const upContainer = document.querySelector('.pokedex-container-2__move--top')
-    // upContainer.addEventListener('click', async(showedPokemons,currentPos) => {
-    //     showedPokemons = await showedPokemons;
-    //     [showedPokemons, currentPos] = await moveUp(showedPokemons,currentPos);
-    //     getPokemonInfo(showedPokemons,currentPos);
-    // })
+    const topContainer = document.querySelector('.pokedex-container-2__move--top')
+    topContainer.onclick = async (click) => {
+        [showedPokemons, currentPos] = await moveUp(showedPokemons,currentPos);
+        getPokemonInfo(showedPokemons,currentPos);
+    }
 
-    // const downContainer = document.querySelector('.pokedex-container-2__move--bot')
+    const downContainer = document.querySelector('.pokedex-container-2__move--bot')
+    downContainer.onclick = async (click) => {
+        [showedPokemons, currentPos] = await moveDown(showedPokemons,currentPos);
+        getPokemonInfo(showedPokemons,currentPos);
+    }
     // downContainer.addEventListener('click', async(showedPokemons,currentPos) => {
-    //     [showedPokemons, currentPos] = await moveRight(showedPokemons,currentPos);
-    //     getPokemonInfo(showedPokemons,currentPos);
-    // })
-
-    // const leftContainer = document.querySelector('.pokedex-container-2__move--left')
-    // leftContainer.addEventListener('click', async(showedPokemons,currentPos) => {
-    //     [showedPokemons, currentPos] = await moveLeft(showedPokemons,currentPos);
-    //     getPokemonInfo(showedPokemons,currentPos);
-    // })
-
-    // const rightContainer = document.querySelector('.pokedex-container-2__move--right')
-    // rightContainer.addEventListener('click', async(showedPokemons,currentPos) => {
     //     [showedPokemons, currentPos] = await moveDown(showedPokemons,currentPos);
     //     getPokemonInfo(showedPokemons,currentPos);
     // })
+
+    const leftContainer = document.querySelector('.pokedex-container-2__move--left')
+    leftContainer.onclick = async (click) => {
+        [showedPokemons, currentPos] = await moveLeft(showedPokemons,currentPos);
+        getPokemonInfo(showedPokemons,currentPos);
+    }
+
+    const rightContainer = document.querySelector('.pokedex-container-2__move--right')
+    rightContainer.onclick = async (click) => {
+        [showedPokemons, currentPos] = await moveRight(showedPokemons,currentPos);
+        getPokemonInfo(showedPokemons,currentPos);
+    }
 
     // ----------Add moving keys----------
     document.addEventListener('keydown', async(event) => {
