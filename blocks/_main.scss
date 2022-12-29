@@ -28,6 +28,9 @@ main {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        &:hover{
+            cursor:pointer;
+        }
     }
 
     &-background {
@@ -213,6 +216,7 @@ main {
                 &:hover {
                     background-color: rgb(255, 228, 196,0.5);
                     transform:scale(1.2);
+                    cursor:pointer;
                 }
             }
 
@@ -231,6 +235,7 @@ main {
                 &:hover {
                     background-color: rgb(255, 228, 196,0.5);
                     transform:scale(1.2);
+                    cursor:pointer;
                 }
             }
 
@@ -241,6 +246,7 @@ main {
                 &:hover {
                     background-color: rgb(255, 228, 196,0.5);
                     transform:scale(1.2);
+                    cursor:pointer;
                 }
             }
 
@@ -251,6 +257,7 @@ main {
                 &:hover {
                     background-color: rgb(255, 228, 196,0.5);
                     transform:scale(1.2);
+                    cursor:pointer;
                 }
             }
         }
