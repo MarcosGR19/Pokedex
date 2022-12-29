@@ -54,6 +54,7 @@ main {
     &-container{
         display:inline-block;
         width:48%;   
+        height: 100%;
 
         @include mobile{
             width:100%;
@@ -73,7 +74,10 @@ main {
         // }
 
         &-screen{
-            margin-top: 260px;
+            // margin-top: 40%;
+            // 260px;
+            position: relative;
+            top: 40%;
             margin-left:78px;
             margin-right: 140px;
             width:292px;
@@ -94,6 +98,7 @@ main {
         display:flex;
         flex-direction: column;
         width:48%;
+        height:100%;
         // Cuidado con añadir altura aqui: saldra blanco por debajo de azul
         font-family: 'Kanit', sans-serif;
         color:rgb(255, 219, 119);

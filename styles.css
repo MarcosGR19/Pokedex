@@ -51,6 +51,7 @@ main {
 .pokedex-container {
   display: inline-block;
   width: 48%;
+  height: 100%;
 }
 @media screen and (max-width: 850px) {
   .pokedex-container {
@@ -64,7 +65,8 @@ main {
   }
 }
 .pokedex-container-screen {
-  margin-top: 260px;
+  position: relative;
+  top: 40%;
   margin-left: 78px;
   margin-right: 140px;
   width: 292px;
@@ -81,6 +83,7 @@ main {
   display: flex;
   flex-direction: column;
   width: 48%;
+  height: 100%;
   font-family: "Kanit", sans-serif;
   color: rgb(255, 219, 119);
 }

@@ -419,13 +419,13 @@ const main = async ()=> {
     let lockKey = false; //var to lock the move funcitonality while we await
 
     // ----------Add onclick functionality (DOES NOT WORK WITH MOVING KEYS)----------
-    // for (i=1; i<=9; i++){
-    //     const item = document.querySelector('#li-'+i);
-    //     item.onclick = (click) =>{
-    //         currentPos = addClick(click, currentPos);
-    //         getPokemonInfo(showedPokemons, currentPos);
-    //     } 
-    // }
+    for (i=1; i<=9; i++){
+        const item = document.querySelector('#li-'+i);
+        item.onclick = (click) =>{
+            currentPos = addClick(click, currentPos);
+            getPokemonInfo(showedPokemons, currentPos);
+        } 
+    }
 
     // ----------Add moving in screen keys - WITH EVENT LISTENERS (DOES NOT WORK WITH MOVING KEYS)----------
     // const upContainer = document.querySelector('.pokedex-container-2__move--top')
