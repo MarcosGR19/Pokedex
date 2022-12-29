@@ -440,7 +440,9 @@ const main = async ()=> {
         [showedPokemons, currentPos] = await moveDown(showedPokemons,currentPos);
         getPokemonInfo(showedPokemons,currentPos);
     }
-    // downContainer.addEventListener('click', async(showedPokemons,currentPos) => {
+
+    // WITH EVENT LISTENER
+    // downContainer.addEventListener('click', async(click) => {
     //     [showedPokemons, currentPos] = await moveDown(showedPokemons,currentPos);
     //     getPokemonInfo(showedPokemons,currentPos);
     // })
